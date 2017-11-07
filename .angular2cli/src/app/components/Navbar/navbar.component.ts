@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'navbar',
@@ -6,8 +6,6 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: 'navbar.html'
 })
 
-export class NavBarComponent implements OnInit{
-  ngOnInit(){
-    console.log('2222');
-  }
+export class NavBarComponent {
+
 }
