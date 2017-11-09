@@ -23,6 +23,7 @@ const appRoutes: Routes = [
             appRoutes
         )],
     providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {
 }

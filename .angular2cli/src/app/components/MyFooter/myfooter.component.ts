@@ -5,10 +5,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['myfooter.less'],
   templateUrl: 'myfooter.html'
 })
-export class MyfooterComponent implements OnInit{
-  public year = new Date().getFullYear();
-  public currentYear: number = this.year;
-  ngOnInit(){
-    console.log('234');
-  }
+export class MyfooterComponent implements OnInit {
+  public currentYear: number = new Date().getFullYear();
+  ngOnInit() {
+  };
 }
