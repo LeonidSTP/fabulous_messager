@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MyfooterComponent} from './myfooter.component';
+import { MyfooterComponent } from './myfooter.component';
 
 @NgModule({
   imports: [
@@ -8,7 +8,7 @@ import {MyfooterComponent} from './myfooter.component';
   ],
   exports: [MyfooterComponent],
   declarations: [MyfooterComponent],
-  providers: []
+  providers: [],
 })
 
 export class MyFooterModule {
