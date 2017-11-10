@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavBarModule } from './components/Navbar/navbar.module';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
+import { MyfooterComponent } from "./components/MyFooter/myfooter.component";
 
 const appRoutes: Routes = [
     {path: 'auth', component: AuthFormComponent},
@@ -12,16 +13,17 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
-        AuthFormComponent
+        AuthFormComponent,
+        MyfooterComponent
     ],
     imports: [
         BrowserModule,
-         NavBarModule,
+        NavBarModule,
         RouterModule.forRoot(
             appRoutes
         )],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule {
 }
