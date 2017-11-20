@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 @Component({
     selector: 'message',
@@ -6,4 +7,12 @@ import { Component } from '@angular/core';
     templateUrl: 'message.html'
 })
 export class MessageComponent {
+    public messages: string[] = [];
+    public message: string;
+    
+    public addMessage(): void {
+        this.messages.push(this.message);
+        delete this.message;
+
+    }
 }

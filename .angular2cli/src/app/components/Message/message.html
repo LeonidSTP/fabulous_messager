@@ -1,0 +1,8 @@
+    <div class="form-group">
+        <label>Input your message</label>
+        <input type="text" [(ngModel)]="message"/>
+    </div>
+    <button type="button" (click)="addMessage()" class="btn btn-primary">Add message</button>
+<div *ngFor="let myMessage of messages">
+    {{myMessage}}
+</div>
