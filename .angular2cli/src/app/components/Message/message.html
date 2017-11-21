@@ -4,12 +4,16 @@
 </div>
 <button type="button" (click)="addMessage()" class="btn btn-primary">Add message</button>
 <div *ngFor="let myMessage of messages">
+  <div class="checkbox">
     <div class="alert alert-info" role="checkbox">
         <div id="close"><span class="glyphicon glyphicon-remove-sign"></span></div>
-        <span>{{myMessage}}</span>
+        <div id="messagetext">
+          <span>{{myMessage.text}}</span>
+        </div>
         <div class="buttons-sections">
-            <span class="glyphicon glyphicon-thumbs-up"></span>
-            <span class="glyphicon glyphicon-thumbs-down"></span>
+            <span class="glyphicon glyphicon-thumbs-up">{{myMessage.likes}}</span>
+            <span class="glyphicon glyphicon-thumbs-down">{{myMessage.dislikes}}</span>
         </div>
     </div>
+  </div>
 </div>
