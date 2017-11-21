@@ -1,17 +1,15 @@
-    <div class="form-group">
-        <label>Input your message</label>
-        <input type="text" [(ngModel)]="message"/>
-    </div>
-    <button type="button" (click)="addMessage()" class="btn btn-primary">Add message</button>
-      <div *ngFor="let myMessage of messages">
-        <div  class="alert alert-info" role="checkbox">
-          <p id="close"><span class="glyphicon glyphicon-remove-sign"></span></p>
-            <textarea rows="4" cols="50">
-              {{myMessage}}
-            </textarea>
-          <p>
+<div class="form-group">
+    <label>Input your message</label>
+    <input type="text" [(ngModel)]="message"/>
+</div>
+<button type="button" (click)="addMessage()" class="btn btn-primary">Add message</button>
+<div *ngFor="let myMessage of messages">
+    <div class="alert alert-info" role="checkbox">
+        <div id="close"><span class="glyphicon glyphicon-remove-sign"></span></div>
+        <span>{{myMessage}}</span>
+        <div class="buttons-sections">
             <span class="glyphicon glyphicon-thumbs-up"></span>
             <span class="glyphicon glyphicon-thumbs-down"></span>
-          </p>
         </div>
-      </div>
+    </div>
+</div>
