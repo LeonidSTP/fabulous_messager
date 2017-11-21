@@ -6,13 +6,15 @@ import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { MyfooterComponent } from './components/MyFooter/myfooter.component';
 import { appRouterModule } from './app.routers';
 import { MessageModule } from './components/Message/message.module';
+import { FeedComponent } from './components/feed/feed.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavBarComponent,
         AuthFormComponent,
-        MyfooterComponent
+        MyfooterComponent,
+        FeedComponent
     ],
     imports: [
         BrowserModule,
