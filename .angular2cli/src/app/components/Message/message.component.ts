@@ -9,10 +9,11 @@ import { NgModel } from '@angular/forms';
 export class MessageComponent {
     public messages: string[] = [];
     public message: string;
-    
+
     public addMessage(): void {
-        this.messages.push(this.message);
-        delete this.message;
+      this.messages.push(this.message);
+      delete this.message;
+
 
     }
 }
