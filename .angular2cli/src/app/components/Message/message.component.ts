@@ -19,7 +19,6 @@ export class MessageComponent {
       Dislike: false,
     };
       this.messages.push(myMessage);
-      console.log(myMessage);
       delete this.message;
 
   }
@@ -32,7 +31,6 @@ export class MessageComponent {
         myMessage.likes++;
         myMessage.Islike = true;
       }
-
   }
   public disLike(myMessage){
     if(!myMessage.Dislike) {
