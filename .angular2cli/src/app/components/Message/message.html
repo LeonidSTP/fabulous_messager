@@ -11,8 +11,8 @@
           <span>{{myMessage.text}}</span>
         </div>
         <div class="buttons-sections">
-          <button (click)="Like(myMessage)">  <span [ngClass]="(myMessage.Islike==true)?'setColor1': 'setColor2'" class="glyphicon glyphicon-thumbs-up"> </span>{{myMessage.likes}}</button>
-          <button  (click)="disLike(myMessage)"> <span [ngClass]="(myMessage.Dislike==true)?'setColor3': 'setColor2'" class="glyphicon glyphicon-thumbs-down"> </span>{{myMessage.dislikes}}</button>
+          <button (click)="Like(myMessage)">  <span [ngClass]="(myMessage.Islike) ?'color-green': 'setColor2'" class="glyphicon glyphicon-thumbs-up"> </span>{{myMessage.likes}}</button>
+          <button  (click)="disLike(myMessage)"> <span [ngClass]="(myMessage.Dislike) ?'setColor3': 'setColor2'" class="glyphicon glyphicon-thumbs-down"> </span>{{myMessage.dislikes}}</button>
         </div>
     </div>
   </div>
