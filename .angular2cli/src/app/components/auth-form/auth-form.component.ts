@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-auth-form',
@@ -17,10 +20,11 @@ export class AuthFormComponent implements OnInit {
         confirmPassword: ''
     };
 
-    constructor(private router: Router) {
+    constructor(public authService: AuthService,
+        private router: Router) {
 
     }
-    
+
     ngOnInit() {
         this.currentUrl = this.router.url;
         console.log(this.currentUrl);
@@ -53,7 +57,7 @@ export class AuthFormComponent implements OnInit {
         console.log(event);
     }
     public saveUser() {
-        console.log(this.user);
+        this.authService.login(this.user).subscribe(data => console.log(data))
     }
 }
 
