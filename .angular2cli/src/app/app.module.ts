@@ -8,7 +8,6 @@ import { MyfooterComponent } from './components/MyFooter/myfooter.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { appRouterModule } from './app.routers';
 import { MessageModule } from './components/Message/message.module';
-import { EqualValidator } from './components/auth-form/equal-validator.directive';
 
 @NgModule({
     declarations: [
@@ -16,8 +15,7 @@ import { EqualValidator } from './components/auth-form/equal-validator.directive
         NavBarComponent,
         AuthFormComponent,
         MyfooterComponent,
-        FeedComponent,
-        EqualValidator
+        FeedComponent
     ],
     imports: [
         BrowserModule,
