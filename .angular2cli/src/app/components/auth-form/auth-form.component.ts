@@ -44,10 +44,12 @@ export class AuthFormComponent implements OnInit {
 
     public login = () => {
         console.log('login');
+
     };
 
     public signup = () => {
         console.log('signup');
+         this.saveUser();
     };
 
     public onEnter(valid, event) {
@@ -57,7 +59,13 @@ export class AuthFormComponent implements OnInit {
         console.log(event);
     }
     public saveUser() {
+        // const attemptLogin = {
+        //     username: this.user.email,
+        //     password: this.user.password,
+        // }
+        if (this.user.password == this.user.confirmPassword){
         this.authService.login(this.user).subscribe(data => console.log(data))
+        }
     }
 }
 
