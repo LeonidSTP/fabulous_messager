@@ -65,14 +65,14 @@ export class AuthFormComponent implements OnInit {
         const attemptLogin = {
             mail: this.user.email,
             password: this.user.password,
-                }
-               this.authService.login(attemptLogin).subscribe(data => console.log(data))
-                }
+        }
+        this.authService.login(attemptLogin).subscribe(data => console.log(data))
+    }
 
-    public saveUser(){
-         if (this.user.password === this.user.confirmPassword) {
-             this.authService.login(this.user).subscribe(data => console.log(data))
-         }
+    public saveUser() {
+        if (this.user.password === this.user.confirmPassword) {
+            this.authService.login(this.user).subscribe(data => console.log(data))
+        }
     }
 }
 

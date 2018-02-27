@@ -30,14 +30,14 @@
                 <label>Confirm Password:</label>
                 <input type="password" name="confirmPassword" class="form-control" #confirmPassword="ngModel"
                        [(ngModel)]="user.confirmPassword" class="form-control"
-                       required minlength="6" maxlength="12"/>
-                <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                       required minlength="6" maxlength="12" />
+                <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)  ">
                     <div class="error-message" *ngIf="confirmPassword.errors.required">Confirm Password required</div>
                     <div class="error-message" *ngIf="confirmPassword.errors.minlength">Confirm Password is too short</div>
+                    </div>
                 </div>
             </div>
-            <button type="submit" (click)="saveUser()"  class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
+            <button type="submit" (click)="proccessLogin()"  class="btn btn-success" [disabled]="!userForm.form.valid" >Submit</button>
         </form>
-    </div>
 </div>
 

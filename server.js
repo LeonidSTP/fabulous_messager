@@ -1,7 +1,11 @@
 const express = require('express');
 const logger = require('morgan');
+const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser')
 const app = express();
+
+
+const saltRounds = 10;
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
@@ -22,7 +26,9 @@ app.use(function (req, res, next) {
 app.post('/login', (req, res) => {
     const user = req.body;
     console.log(user);
-    res.status(200).json(user);
+    const hash = bcrypt.hashSync(user.password, saltRounds);
+    console.log(hash);
+    res.send(user);
 });
 
 
