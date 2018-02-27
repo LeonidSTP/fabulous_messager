@@ -25,7 +25,7 @@ import { MessageModule } from './components/Message/message.module';
         appRouterModule,
         MessageModule
     ],
-    providers: [AuthService, HttpClient, HttpHandler],
+    providers: [],
     bootstrap: [AppComponent],
 })
 export class AppModule {
