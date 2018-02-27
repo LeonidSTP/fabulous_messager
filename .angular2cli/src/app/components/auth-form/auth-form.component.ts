@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class AuthFormComponent implements OnInit {
 
     public currentUrl: any;
-    public user: User =  {
+    public user: User = {
         username: '',
         email: '',
         password: '',
@@ -21,7 +21,7 @@ export class AuthFormComponent implements OnInit {
     };
 
     constructor(public authService: AuthService,
-        private router: Router) {
+                private router: Router) {
 
     }
 
@@ -43,13 +43,14 @@ export class AuthFormComponent implements OnInit {
     }
 
     public login = () => {
-        console.log('login');
 
+        console.log('login');
+        this.sendUser();
     };
 
     public signup = () => {
         console.log('signup');
-         this.saveUser();
+        this.saveUser();
     };
 
     public onEnter(valid, event) {
@@ -58,14 +59,20 @@ export class AuthFormComponent implements OnInit {
         }
         console.log(event);
     }
-    public saveUser() {
-        // const attemptLogin = {
-        //     username: this.user.email,
-        //     password: this.user.password,
-        // }
-        if (this.user.password == this.user.confirmPassword){
-        this.authService.login(this.user).subscribe(data => console.log(data))
-        }
+
+
+    public sendUser() {
+        const attemptLogin = {
+            mail: this.user.email,
+            password: this.user.password,
+                }
+               this.authService.login(attemptLogin).subscribe(data => console.log(data))
+                }
+
+    public saveUser(){
+         if (this.user.password === this.user.confirmPassword) {
+             this.authService.login(this.user).subscribe(data => console.log(data))
+         }
     }
 }
 
