@@ -13,17 +13,19 @@ import { Subscription } from 'rxjs/Subscription';
 export class AuthFormComponent implements OnInit {
 
     public currentUrl: any;
-    public user: User =  {
+    public user: User = {
         username: '',
         email: '',
         password: '',
         confirmPassword: ''
     };
 
-    constructor(public authService: AuthService,
-        private router: Router) {
 
-    }
+    constructor(public authService: AuthService,
+       private router: Router) {
+
+     }
+
 
     ngOnInit() {
         this.currentUrl = this.router.url;

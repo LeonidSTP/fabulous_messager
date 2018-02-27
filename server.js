@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 app.use(logger('dev'));
 app.listen(3000,  () => {
-  console.log('Example app listening on port 3000!')
+    console.log('Example app listening on port 3000!')
 });
 
 app.use(function (req, res, next) {
@@ -19,12 +19,9 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
     next();
 });
+
 app.post('/login', (req, res) => {
     const user = req.body;
     console.log(user);
     res.status(200).json(user);
 });
-
-
-
-
