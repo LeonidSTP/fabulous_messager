@@ -14,7 +14,7 @@ export class AuthFormComponent implements OnInit {
 
     public currentUrl: any;
     public user: User = {
-        username: '',
+        userName: '',
         email: '',
         password: '',
         confirmPassword: ''
@@ -46,10 +46,12 @@ export class AuthFormComponent implements OnInit {
 
     public login = () => {
         console.log('login');
+        this.sendUser();
     };
 
     public signup = () => {
         console.log('signup');
+        this.saveUser();
     };
 
     public onEnter(valid, event) {
@@ -58,13 +60,25 @@ export class AuthFormComponent implements OnInit {
         }
         console.log(event);
     }
+
+
+    public sendUser() {
+        const attemptLogin = {
+            mail: this.user.email,
+            password: this.user.password,
+        }
+        this.authService.login(attemptLogin).subscribe(data => console.log(data))
+    }
+
     public saveUser() {
-        this.authService.login(this.user).subscribe(data => console.log(data))
+        if (this.user.password === this.user.confirmPassword) {
+            this.authService.register(this.user).subscribe(data => console.log(data))
+        }
     }
 }
 
 interface User {
-    username?: string;
+    userName?: string;
     email: string;
     password: string;
     confirmPassword: string;
