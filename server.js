@@ -1,18 +1,31 @@
 const express = require('express');
 const logger = require('morgan');
-const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose'); //ORM allow access to MongoDB
+const config = require('./config/config');
 const app = express();
-
-
-const saltRounds = 10;
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
+    extended: true
 }));
+//Set up default mongoose connection
+mongoose.connect(config.mongoUrl);
+//Get the default connection
+const db = mongoose.connection;
+// Get Mongoose to use the global promise library
+mongoose.Promise = global.Promise;
+
+db.on('error', (err) => {
+    console.error('connection error:', err.message);
+});
+db.once('open', () => {
+    console.info('Connected to DB');
+});
+
+const userModel = require('./models/user');
 
 app.use(logger('dev'));
-app.listen(3000,  () => {
+app.listen(3000, () => {
     console.log('Example app listening on port 3000!')
 });
 
@@ -25,9 +38,12 @@ app.use(function (req, res, next) {
 });
 
 app.post('/login', (req, res) => {
-    const user = req.body;
-    console.log(user);
-    const hash = bcrypt.hashSync(user.password, saltRounds);
-    console.log(hash);
-    res.send(user);
+    const user = new userModel(req.body);
+    user.save((error,  createdUser) => {
+        if (error) {
+            res.send(500, error.message)
+        }
+        console.log('New User Created--->', createdUser);
+        res.status(200).json(createdUser);
+    });
 });
