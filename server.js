@@ -39,7 +39,19 @@ app.use(function (req, res, next) {
 
 app.post('/login', (req, res) => {
     const user = new userModel(req.body);
-    user.save((error,  createdUser) => {
+    user.save((error, createdUser) => {
+        if (error) {
+            res.send(500, error.message)
+        }
+        console.log('New User Created--->', createdUser);
+        res.status(200).json(createdUser);
+    });
+});
+
+app.post('/register', (req, res) => {
+    const user = new userModel(req.body);
+
+    user.save((error, createdUser) => {
         if (error) {
             res.send(500, error.message)
         }
