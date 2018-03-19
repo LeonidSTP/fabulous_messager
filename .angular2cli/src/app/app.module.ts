@@ -11,6 +11,8 @@ import { appRouterModule } from './app.routers';
 import { MessageModule } from './components/Message/message.module';
 import { EqualValidator } from './components/auth-form/equal-validator.directive';
 import { AuthService } from './services/auth.service';
+//import { Angular2JWTModule } from 'angular2-jsonwebtoken';///
+
 
 @NgModule({
     declarations: [
@@ -26,7 +28,8 @@ import { AuthService } from './services/auth.service';
         FormsModule,
         HttpClientModule,
         appRouterModule,
-        MessageModule
+        MessageModule,
+     //  Angular2JWTModule//jsonwebtoken
     ],
     providers: [AuthService],
     bootstrap: [AppComponent],
