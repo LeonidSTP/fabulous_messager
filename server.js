@@ -3,6 +3,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose'); //ORM allow access to MongoDB
 const config = require('./config/config');
+const jwt  = require('jsonwebtoken');
 const app = express();
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -48,6 +49,11 @@ app.post('/login', (req, res) => {
     });
 });
 
+app.use(function(req, res, next) {
+    console.log('Middleware');
+    next()
+});
+
 app.post('/register', (req, res) => {
     const user = new userModel(req.body);
 
@@ -58,4 +64,12 @@ app.post('/register', (req, res) => {
         console.log('New User Created--->', createdUser);
         res.status(200).json(createdUser);
     });
+});
+
+
+app.get('/users', function(req, res) {
+    console.log('Test');
+  userModel.find({}, function(err, user) {
+    res.json(user);
+  });
 });
