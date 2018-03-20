@@ -38,6 +38,7 @@ app.use(function (req, res, next) {
 });
 
 app.post('/login', (req, res) => {
+
     const user = new userModel(req.body);
     user.save((error, createdUser) => {
         if (error) {
@@ -49,6 +50,9 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
+    if(!req.body.userName){
+        res.status(500).send("UserName not provided");
+    }
     const user = new userModel(req.body);
 
     user.save((error, createdUser) => {

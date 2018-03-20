@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-auth-form',
     templateUrl: './auth-form.component.html',
-    styleUrls: ['./auth-form.component.less']
+    styleUrls: ['./auth-form.component.less'],
 })
 export class AuthFormComponent implements OnInit {
 
@@ -22,9 +20,10 @@ export class AuthFormComponent implements OnInit {
 
 
     constructor(public authService: AuthService,
-       private router: Router) {
+       private router: Router,
+       private toastr: ToastrService) {
 
-     }
+    }
 
 
     ngOnInit() {
@@ -32,27 +31,35 @@ export class AuthFormComponent implements OnInit {
         console.log(this.currentUrl);
     }
 
-    public proccessLogin = () => {
+    public proccessLogin = (validForm) => {
+      console.log(validForm);
+      if(!validForm){
+        this.toastr.error('Not all fields are filled', 'Error')
+      }
+      else {
         if (this.currentUrl === '/auth') {
-            this.login();
+          this.login();
         } else {
-            this.signup();
+          this.signup();
         }
-    };
+      }
+    }
 
     public test(value) {
         console.log(value);
     }
 
     public login = () => {
-        console.log('login');
+      console.log('login');
         this.sendUser();
-    };
+    }
 
     public signup = () => {
-        console.log('signup');
-        this.saveUser();
-    };
+      this.toastr.success('Success');
+      console.log(this.toastr);
+       console.log('signup');
+         this.saveUser();
+     }
 
     public onEnter(valid, event) {
         if (!valid) {
@@ -66,13 +73,13 @@ export class AuthFormComponent implements OnInit {
         const attemptLogin = {
             mail: this.user.email,
             password: this.user.password,
-        }
-        this.authService.login(attemptLogin).subscribe(data => console.log(data))
+        };
+        this.authService.login(attemptLogin).subscribe(data => console.log(data));
     }
 
     public saveUser() {
         if (this.user.password === this.user.confirmPassword) {
-            this.authService.register(this.user).subscribe(data => console.log(data))
+            this.authService.register(this.user).subscribe(data => console.log(data));
         }
     }
 }
@@ -83,3 +90,5 @@ interface User {
     password: string;
     confirmPassword: string;
 }
+
+

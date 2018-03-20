@@ -7,7 +7,6 @@ const saltRounds = 10;
 const userModel = new Schema({
     userName: {
         type: String,
-        required: true
     },
     email: {
         type: String,
