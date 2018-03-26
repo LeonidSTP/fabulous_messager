@@ -5,6 +5,13 @@ const mongoose = require('mongoose'); //ORM allow access to MongoDB
 const config = require('./config/config');
 const jwt  = require('jsonwebtoken');
 const app = express();
+const config1 = require('./jwt');
+
+
+//////////////////
+
+
+//////////////////////
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
@@ -15,6 +22,7 @@ mongoose.connect(config.mongoUrl);
 const db = mongoose.connection;
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
+
 
 db.on('error', (err) => {
     console.error('connection error:', err.message);
@@ -66,10 +74,51 @@ app.post('/register', (req, res) => {
     });
 });
 
-
 app.get('/users', function(req, res) {
     console.log('Test');
-  userModel.find({}, function(err, user) {
+    userModel.find({}, function(err, user) {
     res.json(user);
   });
 });
+
+app.set('superSecret', config1.secret); // secret variable
+app.post('/authenticate', function(req, res) {
+
+  // find the user
+  userModel.findOne({  userName: req.body.name }, function(err, user) {
+
+    if (err) throw err;
+
+    if (!user) {
+      res.json({ success: false, message: 'Authentication failed. User not found.' });
+    } else if (user) {
+      // check if password matches
+      if (user.password != req.body.password) {
+        res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+      } else {
+        // if user is found and password is right
+        // create a token with only our given payload
+    // we don't want to pass in the entire user since that has the password
+    const payload = {
+      admin: user.email
+    };
+        var token = jwt.sign(payload, app.get('superSecret'), {
+            // expiresInMinutes: 1440 // expires in 24 hours
+        });
+
+        // return the information including token as JSON
+        res.json({
+          success: true,
+          message: 'Enjoy your token!',
+          token: token
+        });
+      }
+    }
+
+  });
+});
+
+
+
+
+
