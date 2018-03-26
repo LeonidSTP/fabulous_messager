@@ -28,11 +28,9 @@ export class AuthFormComponent implements OnInit {
 
     ngOnInit() {
         this.currentUrl = this.router.url;
-        console.log(this.currentUrl);
     }
 
     public proccessLogin = (validForm) => {
-      console.log(validForm);
       if(!validForm){
         this.toastr.error('Not all fields are filled', 'Error')
       }
@@ -46,18 +44,14 @@ export class AuthFormComponent implements OnInit {
     }
 
     public test(value) {
-        console.log(value);
     }
 
     public login = () => {
-      console.log('login');
         this.sendUser();
     }
 
     public signup = () => {
       this.toastr.success('Success');
-      console.log(this.toastr);
-       console.log('signup');
          this.saveUser();
      }
 
@@ -65,7 +59,6 @@ export class AuthFormComponent implements OnInit {
         if (!valid) {
             return;
         }
-        console.log(event);
     }
 
 

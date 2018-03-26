@@ -16,17 +16,14 @@ const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
 db.on('error', (err) => {
-    console.error('connection error:', err.message);
 });
 db.once('open', () => {
-    console.info('Connected to DB');
 });
 
 const userModel = require('./models/user');
 
 app.use(logger('dev'));
 app.listen(3000, () => {
-    console.log('Example app listening on port 3000!')
 });
 
 app.use(function (req, res, next) {
@@ -44,7 +41,6 @@ app.post('/login', (req, res) => {
         if (error) {
             res.send(500, error.message)
         }
-        console.log('New User Created--->', createdUser);
         res.status(200).json(createdUser);
     });
 });
@@ -59,7 +55,6 @@ app.post('/register', (req, res) => {
         if (error) {
             res.send(500, error.message)
         }
-        console.log('New User Created--->', createdUser);
         res.status(200).json(createdUser);
     });
 });
