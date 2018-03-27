@@ -19,12 +19,12 @@ const userModel = new Schema({
     }
 });
 
-userModel.pre('save', function (next) {
+ userModel.pre('save', function (next) {
     const self = this;
     self.password = bcrypt.hashSync(self.password, saltRounds);
 
     next();
-});
+ });
 
 
 module.exports = mongoose.model('Users', userModel);

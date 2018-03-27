@@ -5,7 +5,7 @@ const mongoose = require('mongoose'); //ORM allow access to MongoDB
 const config = require('./config/config');
 const jwt  = require('jsonwebtoken');
 const app = express();
-const config1 = require('./jwt');
+const jwtconf = require('./jwt');
 
 
 //////////////////
@@ -62,6 +62,39 @@ app.use(function(req, res, next) {
     next()
 });
 
+route middleware to verify a token
+app.use(function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  const token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  // decode token
+  if (token) {
+
+    // verifies secret and checks exp
+    jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+
+        next();
+      }
+    });
+
+  } else {
+
+    // if there is no token
+    // return an error
+    return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
+    });
+
+  }
+});
+
 app.post('/register', (req, res) => {
     const user = new userModel(req.body);
 
@@ -81,7 +114,7 @@ app.get('/users', function(req, res) {
   });
 });
 
-app.set('superSecret', config1.secret); // secret variable
+app.set('superSecret', jwtconf.secret); // secret variable
 app.post('/authenticate', function(req, res) {
 
   // find the user
@@ -100,10 +133,10 @@ app.post('/authenticate', function(req, res) {
         // create a token with only our given payload
     // we don't want to pass in the entire user since that has the password
     const payload = {
-      admin: user.email
+      email: user.email
     };
         var token = jwt.sign(payload, app.get('superSecret'), {
-            // expiresInMinutes: 1440 // expires in 24 hours
+            expiresIn: '24h' // expires in 24 hours
         });
 
         // return the information including token as JSON

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+///import { AuthHttp, AuthConfig} from 'angular2-jsonwebtoken';//
 
 @Component({
     selector: 'app-auth-form',
@@ -22,10 +23,17 @@ export class AuthFormComponent implements OnInit {
 
 
     constructor(public authService: AuthService,
-       private router: Router) {
+       private router: Router) {     }
 
-     }
-
+  //
+  //    public doSomething() {
+  //     this.authHttp.get('/route')
+  //     .subscribe(
+  //       data => console.log(data),
+  //       err => console.log(err),
+  //       () => console.log('RequestComplete')
+  //     );
+  // }
 
     ngOnInit() {
         this.currentUrl = this.router.url;
@@ -75,6 +83,10 @@ export class AuthFormComponent implements OnInit {
             this.authService.register(this.user).subscribe(data => console.log(data))
         }
     }
+
+
+
+
 }
 
 interface User {
