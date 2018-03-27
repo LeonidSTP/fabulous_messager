@@ -1,18 +1,34 @@
 <div class="form-group">
-    <label>Input your message</label>
-    <input type="text" [(ngModel)]="message"/>
+    <label for="focusedInput"> Input your message</label>
+  <textarea  class="form-control" type="text" rows = "4" id="focusedInput" [(ngModel)]="message"></textarea>
 </div>
 <button type="button" (click)="addMessage()" class="btn btn-primary">Add message</button>
 <div *ngFor="let myMessage of messages">
   <div class="checkbox">
-    <div class="alert alert-info" role="checkbox">
-        <div id="close"><span class="glyphicon glyphicon-remove-sign"></span></div>
+    <div class="alert alert-info" role="feed">
+      <div class="post-header">
+        <div class="post-header-line-1">
+          <span class="byline post-timestamp">
+              <a class="timestamp-link" rel="bookmark">
+              <time class="published" datetime="2018-03-21T05:06:00-07:00" title="2018-03-21T05:06:00-07:00">
+              </time>
+              </a>
+          </span>
+          <div id="close"><span class="glyphicon glyphicon-remove-sign"></span></div>
+        </div>
+      </div>
         <div id="messagetext">
           <span>{{myMessage.text}}</span>
         </div>
         <div class="buttons-sections">
           <button (click)="Like(myMessage)">  <span [ngClass]="(myMessage.Islike) ?'color-green': 'setColor2'" class="glyphicon glyphicon-thumbs-up"> </span>{{myMessage.likes}}</button>
           <button  (click)="disLike(myMessage)"> <span [ngClass]="(myMessage.Dislike) ?'setColor3': 'setColor2'" class="glyphicon glyphicon-thumbs-down"> </span>{{myMessage.dislikes}}</button>
+          <div class="byline post-comment-link container">
+            <div id="comment" class="glyphicon glyphicon-comment"></div>
+            <span class="num_comments">
+              Comment
+            </span>
+          </div>
         </div>
     </div>
   </div>
