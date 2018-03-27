@@ -11,6 +11,8 @@ import { appRouterModule } from './app.routers';
 import { MessageModule } from './components/Message/message.module';
 import { EqualValidator } from './components/auth-form/equal-validator.directive';
 import { AuthService } from './services/auth.service';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -20,13 +22,19 @@ import { AuthService } from './services/auth.service';
         MyfooterComponent,
         FeedComponent,
         EqualValidator
+
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
         appRouterModule,
-        MessageModule
+        MessageModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+          positionClass: 'toast-top-right',
+          preventDuplicates: true,
+        })
     ],
     providers: [AuthService],
     bootstrap: [AppComponent],

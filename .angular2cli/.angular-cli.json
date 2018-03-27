@@ -3,6 +3,9 @@
   "project": {
     "name": "angular2cli"
   },
+  "styles": [
+    "styles.scss"
+  ],
   "apps": [
     {
       "root": "src",
@@ -20,7 +23,8 @@
       "prefix": "app",
       "styles": [
         "styles.less",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/ngx-toastr/toastr.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
