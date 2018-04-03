@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MainService } from './services/main.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +11,12 @@ import { Component } from '@angular/core';
 
 
   export class AppComponent {
+    constructor(public mainService: MainService) {
+        console.log(mainService);
+    }
 
+public Test() {
+    this.mainService.testRequest({}).subscribe(data => console.log(data));
 }
+}
+

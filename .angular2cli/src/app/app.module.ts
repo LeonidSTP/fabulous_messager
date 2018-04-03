@@ -11,6 +11,7 @@ import { appRouterModule } from './app.routers';
 import { MessageModule } from './components/Message/message.module';
 import { EqualValidator } from './components/auth-form/equal-validator.directive';
 import { AuthService } from './services/auth.service';
+import { MainService } from './services/main.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -36,7 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
           preventDuplicates: true,
         })
     ],
-    providers: [AuthService],
+    providers: [AuthService, MainService],
     bootstrap: [AppComponent],
 })
 export class AppModule {
