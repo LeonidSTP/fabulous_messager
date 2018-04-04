@@ -4,10 +4,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose'); //ORM allow access to MongoDB
 const config = require('./config/config');
 const app = express();
+
+
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
+
 //Set up default mongoose connection
 mongoose.connect(config.mongoUrl);
 //Get the default connection
@@ -21,6 +24,7 @@ db.once('open', () => {
 });
 
 const userModel = require('./models/user');
+const messageModel = require('./models/message');
 
 app.use(logger('dev'));
 app.listen(3000, () => {
@@ -56,5 +60,34 @@ app.post('/register', (req, res) => {
             res.send(500, error.message)
         }
         res.status(200).json(createdUser);
+    });
+});
+
+app.post('/message', (req, res) => {
+    console.log(req.body);
+    const message = new messageModel(req.body);
+    console.log(message);
+    message.save((error, createdMessage) => {
+            if (error) {
+                res.status(500).send(error.message)
+            }
+
+            console.log('new message -> ', createdMessage);
+            res.status(200).json('ok');
+        })
+
+});
+
+app.get('/feed', (req, res) => {
+    const messages =  messageModel.find(function (error, message) {
+        if(!messages) {
+            res.statusCode = 404;
+            return res.send({ error: 'Not found' });
+        }
+        if (!error) {
+            res.json({success: true, message: 'Enjoy your message!', messages: message});
+        } else {
+            res.status(500).send(error.message);
+        }
     });
 });

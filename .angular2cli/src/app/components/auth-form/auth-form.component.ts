@@ -41,19 +41,19 @@ export class AuthFormComponent implements OnInit {
           this.signup();
         }
       }
-    }
+    };
 
     public test(value) {
     }
 
     public login = () => {
         this.sendUser();
-    }
+    };
 
     public signup = () => {
       this.toastr.success('Success');
          this.saveUser();
-     }
+     };
 
     public onEnter(valid, event) {
         if (!valid) {

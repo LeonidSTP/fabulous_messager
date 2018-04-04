@@ -12,4 +12,5 @@ export class AuthService {
   register(data: any) {
       return this.http.post('http://localhost:3000/register', data);
   }
+
 }

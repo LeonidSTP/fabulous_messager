@@ -1,35 +1,51 @@
-<div class="form-group">
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-3">Create your own message</h1>
+  </div>
+  <div class="form-group">
     <label for="focusedInput"> Input your message</label>
-  <textarea  class="form-control" type="text" rows = "4" id="focusedInput" [(ngModel)]="message"></textarea>
-</div>
-<button type="button" (click)="addMessage()" class="btn btn-primary">Add message</button>
-<div *ngFor="let myMessage of messages">
-  <div class="checkbox">
-    <div class="alert alert-info" role="feed">
-      <div class="post-header">
-        <div class="post-header-line-1">
-          <span class="byline post-timestamp">
-              <a class="timestamp-link" rel="bookmark">
-              <time class="published" datetime="2018-03-21T05:06:00-07:00" title="2018-03-21T05:06:00-07:00">
-              </time>
-              </a>
-          </span>
-          <div id="close"><span class="glyphicon glyphicon-remove-sign"></span></div>
+    <textarea class="form-control" type="text" rows="4" id="focusedInput" [(ngModel)]="message"></textarea>
+  </div>
+  <button type="button" (click)="addMessage()" class="btn btn-primary">Add message</button>
+  <div *ngFor="let message of messages">
+    <div class="panel-group col-md-3 col-md-offset-3">
+      <div class="panel-default">
+        <div class="panel-heading">
+          <h4>
+           <!-- <a href="#" class="thumbnail">
+              <img src="..." alt="UserIcon">
+            </a>-->
+            <span>UserName</span>
+           <!-- <button (click)="handleClick">
+              <span [ngclass]="(message.IsOpen)" class="glyphicon glyphicon-chevron-up"></span>
+              <span [ngclass]="(!message.IsOpen)" class="glyphicon glyphicon-chevron-down"></span>
+            </button>-->
+            <div id="close">
+              <span class="glyphicon glyphicon-remove-sign"></span>
+            </div>
+          </h4>
         </div>
-      </div>
-        <div id="messagetext">
-          <span>{{myMessage.text}}</span>
+        <div class="panel-body">
+          <h5 class="subtitle text-muted"><time title="{{ message.dateMessage | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">{{message.dateMessage}}</time></h5>
+          <section class="text">{{message.text}}</section>
         </div>
-        <div class="buttons-sections">
-          <button (click)="Like(myMessage)">  <span [ngClass]="(myMessage.Islike) ?'color-green': 'setColor2'" class="glyphicon glyphicon-thumbs-up"> </span>{{myMessage.likes}}</button>
-          <button  (click)="disLike(myMessage)"> <span [ngClass]="(myMessage.Dislike) ?'setColor3': 'setColor2'" class="glyphicon glyphicon-thumbs-down"> </span>{{myMessage.dislikes}}</button>
-          <div class="byline post-comment-link container">
-            <div id="comment" class="glyphicon glyphicon-comment"></div>
-            <span class="num_comments">
+        <div class="panel-footer">
+          <div class="buttons-sections">
+            <button (click)="Like(message)"><span [ngClass]="(message.Islike) ?'color-green': 'setColor2'"
+                                                  class="glyphicon glyphicon-thumbs-up"> </span>{{message.likes}}
+            </button>
+            <button (click)="disLike(message)"><span [ngClass]="(message.Dislike) ?'setColor3': 'setColor2'"
+                                                     class="glyphicon glyphicon-thumbs-down"> </span>{{message.dislikes}}
+            </button>
+            <div class="byline post-comment-link container">
+              <div id="comment" class="glyphicon glyphicon-comment"></div>
+              <span class="num_comments">
               Comment
             </span>
+            </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
