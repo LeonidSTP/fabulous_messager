@@ -41,14 +41,14 @@ export class AuthFormComponent implements OnInit {
           this.signup();
         }
       }
-    }
+    };
 
     public test(value) {
     }
 
     public login = () => {
         this.sendUser();
-    }
+    };
 
     public signup = () => {
       this.toastr.success('Success');
@@ -64,10 +64,19 @@ export class AuthFormComponent implements OnInit {
 
     public sendUser() {
         const attemptLogin = {
-            mail: this.user.email,
+            email: this.user.email,
             password: this.user.password,
         };
-        this.authService.login(attemptLogin).subscribe(data => console.log(data));
+
+        this.authService.login(attemptLogin).subscribe((data) => {
+            if (data['token']) {
+                console.log(data);
+                localStorage.setItem('token',JSON.stringify(data['token']))
+                this.router.navigate(['/']);
+            } else {
+                this.toastr.error(data['message']);
+            }
+        });
     }
 
     public saveUser() {
