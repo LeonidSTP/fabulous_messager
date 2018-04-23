@@ -11,5 +11,14 @@ export class MessageService {
   getMessage(data: any){
     return this.http.get('http://localhost:3000/feed', data);
   }
+  editMessage(data:any){
+    const id = data._id;
+
+    return this.http.put(`http://localhost:3000/feed/${id}`, data);
+  }
+  deleteMessage(data:any){
+    const id = data._id;
+    return this.http.put(`http://localhost:3000/feed/${id}`, data);
+  }
 }
 

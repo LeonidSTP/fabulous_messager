@@ -73,21 +73,54 @@ app.post('/message', (req, res) => {
             }
 
             console.log('new message -> ', createdMessage);
-            res.status(200).json('ok');
+            res.status(200).json(message);
         })
 
 });
 
 app.get('/feed', (req, res) => {
-    const messages =  messageModel.find(function (error, message) {
+    const messages =  messageModel.find(function (error, message){
         if(!messages) {
             res.statusCode = 404;
             return res.send({ error: 'Not found' });
         }
         if (!error) {
-            res.json({success: true, message: 'Enjoy your message!', messages: message});
+            res.json(message);
         } else {
             res.status(500).send(error.message);
         }
+    });
+});
+
+app.put('/feed/:id', (req, res) => {
+    const message = messageModel.findOne({_id: req.query.id});
+    if(!message) {
+        res.statusCode = 404;
+        return res.send({ error: 'Not found' });
+    } else {
+        return res.status(200).json(message);
+    }
+});
+
+app.put('/feed/:id', (req, res) => {
+   const Message = messageModel.findById(req.param._id, function (err, message){
+       if(err)
+        res.send(err);
+       message.text = req.body.text;
+       message.save((err) => {
+            if(err)
+                res.send(err);
+           res.json({ message: 'Message updated!' });
+            res.status(200).json(Message);
+       });
+   });
+});
+
+app.delete('feed/:id', (req, res) => {
+   app.remove({_id: req.params._id}, function(err, bear) {
+        if (err)
+            res.send(err);
+
+        res.json({ message: 'Successfully deleted' });
     });
 });

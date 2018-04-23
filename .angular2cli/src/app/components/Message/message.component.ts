@@ -3,8 +3,6 @@ import {MessageService} from '../../services/message.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import * as moment from 'moment';
-import _date = moment.unitOfTime._date;
-import {forEach} from '@angular/router/src/utils/collection';
 
 
 @Component({
@@ -18,7 +16,7 @@ export class MessageComponent implements OnInit{
   constructor(public messageService: MessageService,
               private router: Router,
               private toastr: ToastrService){
-    this.dateMessage = moment().format("LLLL");
+
   };
 
   dateMessage: any;
@@ -31,7 +29,7 @@ export class MessageComponent implements OnInit{
       return;
     }
     const message = {
-      dateMessage: this.dateMessage,
+      dateMessage: new Date(),
       text: this.message,
       likes: 0,
       dislikes: 0,
@@ -39,24 +37,36 @@ export class MessageComponent implements OnInit{
       Dislike: false,
       //IsOpen: true,
     };
-    this.messages.push(message);
-    console.log(this.messages);
+
     this.messageService.createMessage(message).subscribe(data => {
+      this.messages.push(Object.assign({},
+        message,
+        {dateMessage: moment(message.dateMessage).format('LLLL')})
+      );
       delete(this.message);
     });
   }
 
   ngOnInit() {
     this.messageService.getMessage({}).subscribe(data => {
-      console.log(data);
-        this.messages.push(data);
+       var Array = data;
+        data.forEach((item) => {item.dateMessage = moment(item.dateMessage).format('LLLL')});
+
+        this.messages.push(...data);
         console.log(this.messages);
 
     });
-
   }
 
-  public Like(message) {
+  public Edit(message, index){
+    console.log(message);
+    this.messageService.editMessage(message).subscribe(data =>{
+      this.messages[index] = data;
+      console.log(this.messages[index]);
+    });
+  }
+
+  public Like(message, index) {
     if (!message.Islike) {
       if (message.Dislike) {
         message.dislikes--;
@@ -65,9 +75,11 @@ export class MessageComponent implements OnInit{
       message.likes++;
       message.Islike = true;
     }
+
+    this.Edit(message, index);
   }
 
-  public disLike(message) {
+  public disLike(message, index) {
     if (!message.Dislike) {
       if (message.Islike) {
         message.likes--;
@@ -76,6 +88,8 @@ export class MessageComponent implements OnInit{
       message.dislikes++;
       message.Dislike = true;
     }
+    this.Edit(message, index);
+
   }
 
   public handleClick(myMessage){
