@@ -49,11 +49,9 @@ export class MessageComponent implements OnInit{
 
   ngOnInit() {
     this.messageService.getMessage({}).subscribe(data => {
-       var Array = data;
-        data.forEach((item) => {item.dateMessage = moment(item.dateMessage).format('LLLL')});
+      data.forEach((item) => {item.dateMessage = moment(item.dateMessage).format('LLLL')});
 
         this.messages.push(...data);
-        console.log(this.messages);
 
     });
   }

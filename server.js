@@ -85,7 +85,7 @@ app.get('/feed', (req, res) => {
             return res.send({ error: 'Not found' });
         }
         if (!error) {
-            res.json(message);
+            res.status(200).send(message);
         } else {
             res.status(500).send(error.message);
         }
@@ -96,6 +96,7 @@ app.put('/feed/:id', (req, res) => {
     const message = messageModel.findOne({_id: req.query.id});
     if(!message) {
         res.statusCode = 404;
+        console.log("error");
         return res.send({ error: 'Not found' });
     } else {
         return res.status(200).json(message);
@@ -104,12 +105,16 @@ app.put('/feed/:id', (req, res) => {
 
 app.put('/feed/:id', (req, res) => {
    const Message = messageModel.findById(req.param._id, function (err, message){
-       if(err)
-        res.send(err);
+       if(err) {
+           res.send(err);
+           console.log("error");
+       }
        message.text = req.body.text;
        message.save((err) => {
-            if(err)
+            if(err) {
                 res.send(err);
+                console.log("error");
+            }
            res.json({ message: 'Message updated!' });
             res.status(200).json(Message);
        });
