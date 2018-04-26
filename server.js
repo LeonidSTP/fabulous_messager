@@ -3,11 +3,16 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose'); //ORM allow access to MongoDB
 const config = require('./config/config');
+const jwt = require('jsonwebtoken');
 const app = express();
-
+const jwtconf = require('./jwt');
+const userModel = require('./models/user');
+const bcrypt = require('bcrypt'); //crypto lib
+const messageModel = require('./models/message');
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+
     extended: true
 }));
 
@@ -18,17 +23,22 @@ const db = mongoose.connection;
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
 
+const auth = require('./methods/auth');
+
+
 db.on('error', (err) => {
 });
 db.once('open', () => {
 });
 
-const userModel = require('./models/user');
-const messageModel = require('./models/message');
+
+app.set('superSecret', jwtconf.secret); // secret variable
+
 
 app.use(logger('dev'));
 app.listen(3000, () => {
 });
+
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -37,8 +47,9 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
     next();
 });
+auth(app);
 
-app.post('/login', (req, res) => {
+/*app.post('/login', (req, res) => {
 
     const user = new userModel(req.body);
     user.save((error, createdUser) => {
@@ -61,7 +72,7 @@ app.post('/register', (req, res) => {
         }
         res.status(200).json(createdUser);
     });
-});
+});*/
 
 app.post('/message', (req, res) => {
     console.log(req.body);

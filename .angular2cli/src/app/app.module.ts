@@ -11,6 +11,7 @@ import { appRouterModule } from './app.routers';
 import { MessageModule } from './components/Message/message.module';
 import { EqualValidator } from './components/auth-form/equal-validator.directive';
 import { AuthService } from './services/auth.service';
+import { MainService } from './services/main.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MessageService} from './services/message.service';
@@ -41,7 +42,8 @@ import { MomentModule} from 'angular2-moment';
     ],
     providers: [
       AuthService,
-      MessageService
+      MessageService,
+      MainService
     ],
     bootstrap: [AppComponent],
 })
