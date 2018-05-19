@@ -31,9 +31,7 @@ db.on('error', (err) => {
 db.once('open', () => {
 });
 
-
 app.set('superSecret', jwtconf.secret); // secret variable
-
 
 app.use(logger('dev'));
 app.listen(3000, () => {
@@ -51,13 +49,9 @@ auth(app);
 
 /*app.post('/login', (req, res) => {
 
-    const user = new userModel(req.body);
-    user.save((error, createdUser) => {
-        if (error) {
-            res.send(500, error.message)
-        }
-        res.status(200).json(createdUser);
-    });
+app.use(function (req, res, next) {
+    console.log('Middleware');
+    next()
 });
 
 app.post('/register', (req, res) => {
