@@ -47,7 +47,8 @@ export class AuthFormComponent implements OnInit {
     }
 
     public login = () => {
-        this.sendUser();
+      this.toastr.success('Success');
+      this.sendUser();
     };
 
     public signup = () => {
@@ -72,7 +73,7 @@ export class AuthFormComponent implements OnInit {
             if (data['token']) {
                 console.log(data);
                 localStorage.setItem('token',JSON.stringify(data['token']))
-                this.router.navigate(['/']);
+                    this.router.navigate(['/feed']);
             } else {
                 this.toastr.error(data['message']);
             }
@@ -82,6 +83,7 @@ export class AuthFormComponent implements OnInit {
     public saveUser() {
         if (this.user.password === this.user.confirmPassword) {
             this.authService.register(this.user).subscribe(data => console.log(data));
+            this.router.navigate(['/create_account']);
         }
     }
 }

@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import * as moment from 'moment';
 
+declare var $: any;
 
 @Component({
     selector: 'message',
@@ -22,6 +23,7 @@ export class MessageComponent implements OnInit{
   dateMessage: any;
   public messages: any[] = [];
   public message: string;
+  public uploadFile: any;
 
   public addMessage(): void {
     if(!this.message){
@@ -29,6 +31,7 @@ export class MessageComponent implements OnInit{
       return;
     }
     const message = {
+      //file: this.uploadFile,
       dateMessage: new Date(),
       text: this.message,
       likes: 0,
@@ -48,6 +51,32 @@ export class MessageComponent implements OnInit{
   }
 
   ngOnInit() {
+    $("body").on("click",".btn-duplicator", clone_model);
+    $("body").on("click",".btn-remove", remove);
+    $(document).ready(function(){
+      $('.collapsible').collapsible();
+    });
+
+    $(document).ready(function(){
+      $('.materialboxed').materialbox();
+    });
+//Functions
+    function clone_model() {
+      var b = $(this).parent(".content").parent(".dropdown-content").parent(".duplicateable-content"),
+        c = $(".model").clone(true, true);
+
+      c.removeClass('model');
+      c.find('input').addClass('dropify');
+
+      $(b).before(c);
+      $('.dropify').dropify();
+    }
+
+    function remove() {
+      $(this).closest('.duplicateable-content').remove();
+    }
+
+
     this.messageService.getMessage({}).subscribe(data => {
       data.forEach((item) => {item.dateMessage = moment(item.dateMessage).format('LLLL')});
 
@@ -73,8 +102,8 @@ export class MessageComponent implements OnInit{
       message.likes++;
       message.Islike = true;
     }
-
-    this.Edit(message, index);
+    console.log(this.uploadFile);
+    //this.Edit(message, index);
   }
 
   public disLike(message, index) {

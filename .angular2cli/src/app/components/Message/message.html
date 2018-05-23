@@ -1,50 +1,109 @@
-<div class="container">
-  <div class="jumbotron">
-    <h1 class="display-3">Create your own message</h1>
-  </div>
-  <div class="form-group">
+<div class="col s12 m8 l10 container-fluid">
+  <div class="input-field create-message">
+    <textarea class="materialize-textarea" type="text" rows="4" id="focusedInput"
+              [(ngModel)]="message"></textarea>
     <label for="focusedInput"> Input your message</label>
-    <textarea class="form-control" type="text" rows="4" id="focusedInput" [(ngModel)]="message"></textarea>
+    <div class="container">
+      <div class='hiddendiv'>
+        <div class="col s12 duplicateable-content model">
+          <div class="item-block">
+            <button class="btn-floating waves-effect waves-light green darken-3 btn-remove">
+              <i class="material-icons">clear</i>
+            </button>
+            <input type="file" [(ngModel)]="uploadFile" class="dropify-event">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m8 l9 right-align duplicateable-content">
+      <a class="dropdown-button btn-floating btn-flat waves-effect waves-light white-text green darken-3"
+         data-activates="dropdown2">
+        <i class="material-icons">cloud_download</i>
+      </a>
+      <ul id="dropdown2" class="dropdown-content"
+          style="white-space: nowrap; position: absolute; top: 1028.72px; left: 751.891px; display: none; opacity: 1;">
+        <li class="content"><a class="btn-duplicator">file</a>
+        </li>
+        <li class="content"><a class="btn-duplicator">photo</a>
+        </li>
+        <li class="content"><a class="btn-duplicator">video</a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <button type="button" (click)="addMessage()" class="btn btn-primary">Add message</button>
-  <div *ngFor="let message of messages; let i = index">
-    <div class="panel-group col-md-3 col-md-offset-3">
-      <div class="card">
-        <div class="card-header">
-          <h4>
-           <!-- <a href="#" class="thumbnail">
-              <img src="..." alt="UserIcon">
-            </a>-->
-            <span>UserName</span>
-           <!-- <button (click)="handleClick">
-              <span [ngclass]="(message.IsOpen)" class="glyphicon glyphicon-chevron-up"></span>
-              <span [ngclass]="(!message.IsOpen)" class="glyphicon glyphicon-chevron-down"></span>
-            </button>-->
-            <div id = "edit">
-              <span (click)="Edit(message, message.id)" class="glyphicon glyphicon-pencil"></span>
+  <button (click)="addMessage()" class="btn waves-effect waves-light green darken-3" type="submit" name="action">Add
+    message
+    <i class="material-icons right">send</i>
+  </button>
+</div>
+<div class="row">
+  <div class="col s12 m4 l3">
+    <!-- Grey navigation panel -->
+  </div>
+
+  <div class="col s12 m8 l9 context">
+    <!-- Teal page content  -->
+
+    <div class="container">
+        <div *ngFor="let message of messages; let i = index">
+          <div class="profile-page-wall-post" class="card">
+          <div class="card-profile-title">
+            <div class="row">
+              <div class="col s2">
+                <img src="../assets/default-avatar.png" alt=""
+                     class="circle z-depth-2 responsive-img activator gradient-45deg-light-blue-cyan">
+              </div>
+              <div class="col s9">
+                <p class="grey-text text-darken-4 margin">{{username}}</p>
+                <span class="grey-text text-darken-1 ultra-small">
+                <time title="{{ message.dateMessage}}">{{message.dateMessage}}</time>
+              </span>
+              </div>
+              <ul class="col s1 right-align">
+                <i class="material-icons">expand_more</i>
+                <li id="edit">
+                  <span (click)="Edit(message, message.id)" class="glyphicon glyphicon-pencil"></span>
+                </li>
+                <li id="close">
+                  <span class="glyphicon glyphicon-remove-sign"></span>
+                </li>
+              </ul>
             </div>
-            <div id="close">
-              <span class="glyphicon glyphicon-remove-sign"></span>
+            <div class="row">
+              <div class="col s12">
+                <p>I am a very simple wall post. I am good at containing <a href="#">#small</a> bits of <a href="#">#information</a>.
+                  I require little more information to use effectively.</p>
+              </div>
             </div>
-          </h4>
-        </div>
-        <div class="card-body">
-          <h5 class="subtitle text-muted"><time title="{{ message.dateMessage}}">{{message.dateMessage}}</time></h5>
-          <section class="text">{{message.text}}</section>
-        </div>
-        <div class="card-footer">
-          <div class="buttons-sections">
-            <button (click)="Like(message, i)"><span [ngClass]="(message.Islike) ?'color-green': 'setColor2'"
-                                                  class="glyphicon glyphicon-thumbs-up"> </span>{{message.likes}}
-            </button>
-            <button (click)="disLike(message)"><span [ngClass]="(message.Dislike) ?'setColor3': 'setColor2'"
-                                                     class="glyphicon glyphicon-thumbs-down"> </span>{{message.dislikes}}
-            </button>
-            <div class="byline post-comment-link container">
-              <div id="comment" class="glyphicon glyphicon-comment"></div>
-              <span class="num_comments">
-              Comment
-            </span>
+          </div>
+          <div class="card-image profile-medium">
+            <div class="video-container no-controls">
+              <iframe width="640" height="360" src="https://www.youtube.com/embed/10r9ozshGVE" frameborder="0"
+                      allowfullscreen=""></iframe>
+            </div>
+            <span class="card-title text-shadow">Card Title</span>
+          </div>
+          <div class="card-content">
+            <section class="text">{{message.text}}</section>
+            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
+              require little markup to use effectively.</p>
+          </div>
+          <div class="card-action row">
+            <div class="col s4 card-action-share">
+              <a  (click)="Like(message, i)" class="waves-effect waves-light" >
+                <i [ngClass]="(message.Islike) ?'color-green': 'setColor2'" class="material-icons grey-text text-darken-1">
+                  thumb_up {{message.likes}}
+                </i>
+              </a>
+              <a (click)="disLike(message)" class="waves-effect waves-light">
+                <i [ngClass]="(message.Dislike) ?'setColor3': 'setColor2'" class="material-icons grey-text text-darken-1">
+                  thumb_down {{message.dislikes}}
+                </i>
+              </a>
+            </div>
+            <div class="input-field col s8 margin">
+              <input id="profile-comments2" type="text" class="validate margin">
+              <label for="profile-comments2" class="">Comments</label>
             </div>
           </div>
         </div>
@@ -52,3 +111,4 @@
     </div>
   </div>
 </div>
+

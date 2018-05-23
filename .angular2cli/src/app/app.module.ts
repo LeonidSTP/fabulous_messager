@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/Navbar/navbar.component';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
@@ -14,8 +14,11 @@ import { AuthService } from './services/auth.service';
 import { MainService } from './services/main.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MessageService} from './services/message.service';
+import { MessageService } from './services/message.service';
 import { MomentModule} from 'angular2-moment';
+import { Create_accountComponent} from './components/create-account/create_account.component';
+import { ParticlesModule} from 'angular-particle';
+import { MaterializeModule } from 'angular2-materialize';
 
 @NgModule({
     declarations: [
@@ -24,17 +27,21 @@ import { MomentModule} from 'angular2-moment';
         AuthFormComponent,
         MyfooterComponent,
         FeedComponent,
-        EqualValidator
+        EqualValidator,
+        Create_accountComponent
 
     ],
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpClientModule,
         appRouterModule,
         MessageModule,
         BrowserAnimationsModule,
         MomentModule,
+        MaterializeModule,
+        ParticlesModule,
         ToastrModule.forRoot({
           positionClass: 'toast-top-right',
           preventDuplicates: true,

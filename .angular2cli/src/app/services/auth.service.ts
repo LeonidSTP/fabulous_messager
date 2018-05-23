@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as url from 'url';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +11,11 @@ export class AuthService {
   }
 
   register(data: any) {
-      return this.http.post('http://localhost:3000/register', data);
+    return this.http.post('http://localhost:3000/register', data);
+  }
+
+  create(data: any) {
+    return this.http.post('http://localhost:3000/create', data);
   }
 
 }

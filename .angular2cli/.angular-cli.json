@@ -3,9 +3,6 @@
   "project": {
     "name": "angular2cli"
   },
-  "styles": [
-    "styles.scss"
-  ],
   "apps": [
     {
       "root": "src",
@@ -23,10 +20,19 @@
       "prefix": "app",
       "styles": [
         "styles.less",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/ngx-toastr/toastr.css"
+        "../node_modules/materialize-css/dist/css/materialize.css",
+        "../node_modules/ngx-toastr/toastr.css",
+        "../node_modules/dropify/dist/css/dropify.min.css"
+
+
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/hammerjs/hammer.js",
+        "../node_modules/materialize-css/dist/js/materialize.js",
+        "../node_modules/dropify/dist/js/dropify.js"
+
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

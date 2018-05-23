@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MainService } from './services/main.service';
 import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,12 @@ import { Observable } from 'rxjs/Observable';
 
 
 
-  export class AppComponent {
+  export class AppComponent implements OnInit{
     constructor(public mainService: MainService) {
         console.log(mainService);
     }
-
+  ngOnInit() {
+  }
 public Test() {
     this.mainService.testRequest({}).subscribe(data => console.log(data));
 }
