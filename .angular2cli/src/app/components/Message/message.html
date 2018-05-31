@@ -39,6 +39,8 @@
 <div class="row">
   <div class="col s12 m4 l3">
     <!-- Grey navigation panel -->
+
+    <sideComponent></sideComponent>
   </div>
 
   <div class="col s12 m8 l9 context">
@@ -53,21 +55,23 @@
                 <img src="../assets/default-avatar.png" alt=""
                      class="circle z-depth-2 responsive-img activator gradient-45deg-light-blue-cyan">
               </div>
-              <div class="col s9">
+              <div class="col s8">
                 <p class="grey-text text-darken-4 margin">{{username}}</p>
                 <span class="grey-text text-darken-1 ultra-small">
-                <time title="{{ message.dateMessage}}">{{message.dateMessage}}</time>
-              </span>
+                  <time title="{{ message.dateMessage}}">{{message.dateMessage}}</time>
+                </span>
               </div>
-              <ul class="col s1 right-align">
-                <i class="material-icons">expand_more</i>
-                <li id="edit">
-                  <span (click)="Edit(message, message.id)" class="glyphicon glyphicon-pencil"></span>
-                </li>
-                <li id="close">
-                  <span class="glyphicon glyphicon-remove-sign"></span>
-                </li>
-              </ul>
+              <div  class="col s2 right-align">
+                <div>
+                  <a>
+                    <i (click)="Edit(message, message.id)" class="material-icons waves-effect waves-light grey-text text-darken-1">create</i>
+                  </a>
+                  <a >
+                    <i (click)="onDelete()" class="material-icons waves-effect waves-light grey-text text-darken-1">delete_sweep</i>
+                  </a>
+                </div>
+              </div>
+
             </div>
             <div class="row">
               <div class="col s12">
@@ -78,10 +82,9 @@
           </div>
           <div class="card-image profile-medium">
             <div class="video-container no-controls">
-              <iframe width="640" height="360" src="https://www.youtube.com/embed/10r9ozshGVE" frameborder="0"
-                      allowfullscreen=""></iframe>
+             <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/10r9ozshGVE" frameborder="0"
+                      allowfullscreen=""></iframe>-->
             </div>
-            <span class="card-title text-shadow">Card Title</span>
           </div>
           <div class="card-content">
             <section class="text">{{message.text}}</section>
@@ -90,14 +93,16 @@
           </div>
           <div class="card-action row">
             <div class="col s4 card-action-share">
-              <a  (click)="Like(message, i)" class="waves-effect waves-light" >
+              <a  (click)="Like(message, i)" class="waves-effect waves-light text-darken-1" >
+                <i class="left-align"> {{message.likes}}</i>
                 <i [ngClass]="(message.Islike) ?'color-green': 'setColor2'" class="material-icons grey-text text-darken-1">
-                  thumb_up {{message.likes}}
+                  thumb_up
                 </i>
               </a>
-              <a (click)="disLike(message)" class="waves-effect waves-light">
+              <a (click)="disLike(message)" class="waves-effect waves-light text-darken-1">
+                <i class="left-align">{{message.dislikes}}</i>
                 <i [ngClass]="(message.Dislike) ?'setColor3': 'setColor2'" class="material-icons grey-text text-darken-1">
-                  thumb_down {{message.dislikes}}
+                  thumb_down
                 </i>
               </a>
             </div>

@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as url from 'url';
+import {Observable} from 'rxjs/Observable';
+
+export interface User {
+  userName?: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 @Injectable()
 export class AuthService {
@@ -14,8 +22,6 @@ export class AuthService {
     return this.http.post('http://localhost:3000/register', data);
   }
 
-  create(data: any) {
-    return this.http.post('http://localhost:3000/create', data);
-  }
+
 
 }

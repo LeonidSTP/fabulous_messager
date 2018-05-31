@@ -3,8 +3,9 @@ import {MessageService} from '../../services/message.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import * as moment from 'moment';
+import {SidenavComponent} from './sidenav/sidenav.component';
+import {jquery} from './JqueryCode';
 
-declare var $: any;
 
 @Component({
     selector: 'message',
@@ -31,7 +32,7 @@ export class MessageComponent implements OnInit{
       return;
     }
     const message = {
-      //file: this.uploadFile,
+      //                                                                                                                                                                                                                                                                                                                                                                                                                                                                  file: this.uploadFile,
       dateMessage: new Date(),
       text: this.message,
       likes: 0,
@@ -51,31 +52,8 @@ export class MessageComponent implements OnInit{
   }
 
   ngOnInit() {
-    $("body").on("click",".btn-duplicator", clone_model);
-    $("body").on("click",".btn-remove", remove);
-    $(document).ready(function(){
-      $('.collapsible').collapsible();
-    });
 
-    $(document).ready(function(){
-      $('.materialboxed').materialbox();
-    });
-//Functions
-    function clone_model() {
-      var b = $(this).parent(".content").parent(".dropdown-content").parent(".duplicateable-content"),
-        c = $(".model").clone(true, true);
-
-      c.removeClass('model');
-      c.find('input').addClass('dropify');
-
-      $(b).before(c);
-      $('.dropify').dropify();
-    }
-
-    function remove() {
-      $(this).closest('.duplicateable-content').remove();
-    }
-
+    jquery();
 
     this.messageService.getMessage({}).subscribe(data => {
       data.forEach((item) => {item.dateMessage = moment(item.dateMessage).format('LLLL')});
@@ -119,9 +97,9 @@ export class MessageComponent implements OnInit{
 
   }
 
-  public handleClick(myMessage){
-    myMessage.IsOpen = !myMessage.IsOpen;
-  }
+  // public handleClick(myMessage){
+  //   myMessage.IsOpen = !myMessage.IsOpen;
+  // }
 }
 
 

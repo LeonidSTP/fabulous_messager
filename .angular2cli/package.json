@@ -24,6 +24,7 @@
     "angular-particle": "^1.0.4",
     "angular2-materialize": "^15.1.10",
     "angular2-moment": "^1.8.0",
+    "aws-sdk": "^2.245.1",
     "bootstrap": "^4.1.0",
     "core-js": "^2.5.3",
     "dropify": "^0.2.2",

@@ -1,0 +1,98 @@
+.sidenav {
+  position: relative;
+  margin: 0;
+  background-color: #fff;
+  z-index: 999;
+}
+  .sidenav .user-view {
+    padding: 16px 16px 0;
+  }
+  .sidenav .user-view .background {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
+.sidenav .user-view {
+  position: relative;
+  margin-bottom: 8px;
+  .circle {
+    height: 64px;
+    width: 64px;
+    display: block;
+    border-radius: 50%;
+  }
+}
+.sidenav .user-view .name {
+  margin-top: 16px;
+  font-weight: 600;
+}
+.sidenav .user-view .email {
+  padding-bottom: 16px;
+  font-weight: 500;
+}
+.sidenav .user-view .name, .sidenav .user-view .email {
+  font-size: 14px;
+  line-height: 24px;
+  display: block;
+}
+.sidenav li>a>i.material-icons {
+  float: left;
+  height: 48px;
+  line-height: 48px;
+  margin: 0 32px 0 0;
+  width: 24px;
+  color: rgba(0,0,0,0.54);
+}
+.sidenav .subheader {
+  cursor: initial;
+  pointer-events: none;
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+.sidenav li>a {
+  color: rgba(0,0,0,0.87);
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 32px;
+}
+a {
+  text-decoration: none;
+}
+.card{
+  margin-top: 0px;
+  padding-bottom: 100%;
+  box-shadow: none !important;
+}
+.input-field{
+  padding: 0px;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #2E7D32;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #2E7D32;
+  box-shadow: 0 1px 0 0 #2E7D32;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: none;
+  box-shadow: 0 0.5px 0 0 #7f8c8d;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: none;
+  box-shadow: 0 1px 0 0 #7f8c8d;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #2E7D32;
+}
+

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
+import {UserInfoService, UserInfo} from '../../services/userInfo.service';
 
 @Component({
   selector: 'create_account',
@@ -10,10 +10,10 @@ import {AuthService} from '../../services/auth.service';
 
 export class Create_accountComponent implements OnInit{
 
-  constructor(public authService: AuthService,
+  constructor(public userInfoService: UserInfoService,
               private router: Router,) {}
 
-    public userInfo: Info = {
+    public userInfo: UserInfo = {
     avatar: '',
     firstName: '',
     lastName: '',
@@ -28,16 +28,8 @@ export class Create_accountComponent implements OnInit{
 
    public processCreate(){
      console.log(this.userInfo);
-     this.authService.create(this.userInfo).subscribe(data => console.log(data));
+     this.userInfoService.create(this.userInfo).subscribe(data => console.log(data));
+     this.router.navigate(['/profile']);
    }
 }
-interface Info{
-  avatar?: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  city?: string,
-  streetName?: string,
-  streetNumber?: number,
-  country?: string
-}
+

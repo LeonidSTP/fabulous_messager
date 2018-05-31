@@ -19,6 +19,11 @@ import { MomentModule} from 'angular2-moment';
 import { Create_accountComponent} from './components/create-account/create_account.component';
 import { ParticlesModule} from 'angular-particle';
 import { MaterializeModule } from 'angular2-materialize';
+import { ProfileComponent} from './components/profile/profile.component';
+import { ProfileHeaderComponent} from './components/profile/pageheader/profileHeader.component';
+import {ProfileSidebarComponent} from './components/profile/pagesidebar/profileSidebar.component';
+import {ProfileWallPostsComponent} from './components/profile/pagewallposts/profileWallPosts.component';
+import {ProfileShareComponent} from './components/profile/profileshare/profileShare.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +33,12 @@ import { MaterializeModule } from 'angular2-materialize';
         MyfooterComponent,
         FeedComponent,
         EqualValidator,
-        Create_accountComponent
+        Create_accountComponent,
+        ProfileComponent,
+        ProfileHeaderComponent,
+        ProfileSidebarComponent,
+        ProfileWallPostsComponent,
+        ProfileShareComponent
 
     ],
     imports: [

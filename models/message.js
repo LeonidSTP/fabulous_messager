@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const messageModel = new Schema({
+    file: {
+      type: String,
+        required: false
+    },
     dateMessage: {
         type: Date
     },

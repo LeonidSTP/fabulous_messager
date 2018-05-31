@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService, User } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -47,12 +47,10 @@ export class AuthFormComponent implements OnInit {
     }
 
     public login = () => {
-      this.toastr.success('Success');
       this.sendUser();
     };
 
     public signup = () => {
-      this.toastr.success('Success');
          this.saveUser();
      };
 
@@ -72,8 +70,10 @@ export class AuthFormComponent implements OnInit {
         this.authService.login(attemptLogin).subscribe((data) => {
             if (data['token']) {
                 console.log(data);
-                localStorage.setItem('token',JSON.stringify(data['token']))
+                localStorage.setItem('token',JSON.stringify(data['token']));
                     this.router.navigate(['/feed']);
+              this.toastr.success('Success');
+
             } else {
                 this.toastr.error(data['message']);
             }
@@ -84,15 +84,12 @@ export class AuthFormComponent implements OnInit {
         if (this.user.password === this.user.confirmPassword) {
             this.authService.register(this.user).subscribe(data => console.log(data));
             this.router.navigate(['/create_account']);
+          this.toastr.success('Success');
+
         }
     }
 }
 
-interface User {
-    userName?: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-}
+
 
 

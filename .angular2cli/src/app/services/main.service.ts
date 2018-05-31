@@ -14,6 +14,6 @@ export class MainService {
         const token = localStorage.getItem('token');
         let headers = new HttpHeaders();
         headers.append('Token', token);
-        return this.http.get('localhost:3000/users', {headers: headers})
+        return this.http.get('http://localhost:3000/users', {headers: headers})
     }
 }
